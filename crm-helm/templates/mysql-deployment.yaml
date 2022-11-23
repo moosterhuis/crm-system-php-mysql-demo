@@ -43,8 +43,13 @@ spec:
         volumeMounts:
         - mountPath: /docker-entrypoint-initdb.d/
           name: db-volume
+        - mountPath: /var/lib/mysql
+          name: mysql-persistent-storage
       volumes:
       - name: db-volume
         hostPath:
           path: {{ .Values.mysql_deployment.path }}
           type: Directory
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
