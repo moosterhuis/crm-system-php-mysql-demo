@@ -1,0 +1,22 @@
+mysql_deployment:
+  image: mysql:8.0.31-debian
+  # local directory for the .sql files for initializing the database 
+  path: /mnt/c/Projects/crm-system-php-mysql-demo/database
+
+mysql_config:
+  data:
+    MYSQL_DATABASE: webdamn
+
+mysql_secret:
+  data:
+    MYSQL_ROOT_PASSWORD: cGFzc3dvcmQ=
+    MYSQL_USER: dXNlcg==
+    MYSQL_PASSWORD: cGFzc3dvcmQ=
+
+
+frontend_deployment:
+  image: moosterhuis/crm-php:v4
+
+frontend_config:
+  data:
+    MYSQL_HOST: mysql-service
